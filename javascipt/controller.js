@@ -1112,12 +1112,6 @@ app.controller('controller', function($scope, $http) {
         angular.forEach(products, function(product) {
             $http({
                 method: 'GET',
-                headers:{
-                    "Accept":"application/json, text/plain, */*",
-                    "Access-Control-Allow-Origin": "*",
-                    "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-                    "Access-Control-Allow-Headers": "Origin, Content-Type, X-Auth-Token"
-                },
                 url: "https://freight.aliexpress.com/ajaxFreightCalculateService.htm?f=d&productid=" + product.productId +"&count=1&currencyCode=USD&abVersion=1&_=1541584409742"
             }).then(function successCallback(response) {
                 console.log(response);
