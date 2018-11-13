@@ -1112,7 +1112,7 @@ app.controller('controller', function($scope, $http) {
         angular.forEach(products, function(product) {
             $http({
                 method: 'GET',
-                url: "https://freight.aliexpress.com/ajaxFreightCalculateService.htm?f=d&productid=" + product.productId +"&count=1&currencyCode=USD&abVersion=1&_=1541584409742"
+                url: "https://freight.aliexpress.com/ajaxFreightCalculateService.htm?callback=jQuery18304105555735913331_1542082591571&f=d&productid=" + product.productId +"&count=1&minPrice=51.02&maxPrice=54.93&currencyCode=USD&transactionCurrencyCode=USD&sendGoodsCountry=&country=US&province=&city=&abVersion=1&_=1542084501683"
             }).then(function successCallback(response) {
                 console.log(response);
             }, function errorCallback(response) {
