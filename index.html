@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Search products from AliExpress</title>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="javascipt/angular.min.js"></script>
+    <script src="javascipt/controller.js"></script>
+</head>
+<body ng-app="myApp" ng-controller="controller">
+<div class="col-lg-6" style="clear: both; margin-top: 30px">
+    <form name="myForm">
+        <div class="form-group col-lg-12">
+            <label>Trường</label>
+            <select ng-model="params.categoryId" name="school" class="form-control">
+                <option selected="selected" value="">-- Select Category --</option>
+                <option ng-repeat="category in categories" value="{{ category.id || category.id_2 }}">{{ category.name || category.name_2 + ' (Main)' }}</option>
+            </select>
+        </div>
+
+        <div>
+            <div class="form-group col-lg-12">
+                <label>Tìm Kiếm</label>
+                <input ng-model="params.keywords" name="keywords" type="text" class="form-control" placeholder="Search ... ">
+            </div>
+
+            <div class="form-group col-lg-6">
+                <label>Số lượng sản phẩm bán ra tối thiểu</label>
+                <input ng-model="params.volumeFrom" name="volumeFrom" type="number" class="form-control" placeholder="Min ...">
+            </div>
+
+            <div class="form-group col-lg-6">
+                <label>Số lượng sản phẩm bán ra tối đa</label>
+                <input ng-model="params.volumeTo" name="volumeTo" type="number" class="form-control" placeholder="Max ... ">
+            </div>
+
+            <div class="form-group col-lg-6">
+                <label>Giá tối thiểu ($)</label>
+                <input ng-model="params.originalPriceFrom" name="volumeFrom" type="number" class="form-control" placeholder="Min ...">
+            </div>
+
+            <div class="form-group col-lg-6">
+                <label>Giá tối đa ($)</label>
+                <input ng-model="params.originalPriceTo" name="volumeTo" type="number" class="form-control" placeholder="Max ... ">
+            </div>
+
+            <div class="form-group col-lg-12">
+                <label>Số lượng sản phẩm Max (ước lượng)</label>
+                <input ng-model="params.numProductsMax" name="volumeTo" type="number" class="form-control" placeholder="Max ... ">
+            </div>
+        </div>
+
+        <div class="col-lg-12">
+            <button ng-disabled="!formDisabled()" type="button" ng-click="submit('params')" class="btn btn-default">Submit</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>
