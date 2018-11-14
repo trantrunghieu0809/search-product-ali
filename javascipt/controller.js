@@ -1100,20 +1100,14 @@ app.controller('controller', function($scope, $http) {
     };
 
     $scope.submit = function() {
-        $_url = 'pageNo='+ $scope.params.pageNo + '&categoryId='+ $scope.params.categoryId + '&keywords='+ $scope.params.keywords + '&volumeFrom='+ $scope.params.volumeFrom + '&volumeTo='+ $scope.params.volumeTo + '&pageSize='+ $scope.params.pageSize + '&originalPriceFrom=1&originalPriceTo=15&fields=productUrl,productId,allImageUrls,productTitle,originalPrice,salePrice,evaluateScore,volume,packageType';
+        $_url = 'pageNo='+ $scope.params.pageNo + '&categoryId='+ $scope.params.categoryId + '&keywords='+ $scope.params.keywords + '&volumeFrom='+ $scope.params.volumeFrom + '&volumeTo='+ $scope.params.volumeTo + '&pageSize='+ $scope.params.pageSize + '&originalPriceFrom=1&originalPriceTo=15&fields=productUrl,imageUrl,productId,allImageUrls,productTitle,originalPrice,salePrice,evaluateScore,volume,packageType';
 
         $http({
             method: 'GET',
             url: $url + $_url
         }).then(function successCallback(response) {
             var data = response.data.result;
-            data.products;
-
-            angular.forEach(data.products, function(product) {
-                $scope.products.push(product);
-            });
-            console.log($scope.products);
-            //getFreight(data.products);
+            getFreight(data.products);
         }, function errorCallback(response) {
 
         });
@@ -1123,8 +1117,14 @@ app.controller('controller', function($scope, $http) {
         angular.forEach(products, function(product) {
             $http({
                 method: 'GET',
+                headers: {
+                    "Access-Control-Allow-Credentials" : "true",
+                    "Access-Control-Allow-Origin" : '*',
+                    "Content-Type" : "application/json"
+                },
                 url: "https://freight.aliexpress.com/ajaxFreightCalculateService.htm?callback=jQuery18304105555735913331_1542082591571&f=d&productid=" + product.productId +"&count=1&minPrice=51.02&maxPrice=54.93&currencyCode=USD&transactionCurrencyCode=USD&sendGoodsCountry=&country=US&province=&city=&abVersion=1&_=1542084501683"
             }).then(function successCallback(response) {
+                $scope.products.push(product);
                 console.log(response);
             }, function errorCallback(response) {
                 console.log(response);
