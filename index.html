@@ -10,6 +10,8 @@
     <script src="javascipt/angular.min.js"></script>
     <script src="javascipt/angular-table.min.js"></script>
     <script src="javascipt/controller.js"></script>
+    <script src="javascipt/json-export-excel.js"></script>
+    <script src="javascipt/FileSaver.js"></script>
 </head>
 <body ng-app="myApp" ng-controller="controller">
 <div class="col-lg-6" style="clear: both; margin-top: 30px">
@@ -61,6 +63,8 @@
 </div>
 
 <div ng-if="products.length > 0" class="col-lg-6" style="margin-top: 20px">
+    <button ng-json-export-excel data="products" report-fields="{'imageUrl': 'Ảnh', productTitle: 'Tên SP', originalPrice: 'Giá SP', evaluateScore: 'Điểm'}" filename =" 'export-excel' " separator="," class="css-class">Export  Excel</button>
+
     <table class="table table-striped table-bordered" at-table at-list="products" at-paginated at-config="config">
         <thead></thead>
         <tbody>

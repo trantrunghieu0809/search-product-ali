@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['angular-table']);
+var app = angular.module('myApp', ['angular-table', 'ngJsonExportExcel']);
 app.controller('controller', function($scope, $http) {
 
     $url = "https://gw.api.alibaba.com/openapi/param2/2/portals.open/api.listPromotionProduct/96623?";
@@ -1107,7 +1107,9 @@ app.controller('controller', function($scope, $http) {
             url: $url + $_url
         }).then(function successCallback(response) {
             var data = response.data.result;
-            getFreight(data.products);
+            $scope.products = data.products;
+
+            //getFreight(data.products);
         }, function errorCallback(response) {
 
         });
@@ -1117,14 +1119,8 @@ app.controller('controller', function($scope, $http) {
         angular.forEach(products, function(product) {
             $http({
                 method: 'GET',
-                headers: {
-                    "Access-Control-Allow-Credentials" : "true",
-                    "Access-Control-Allow-Origin" : '*',
-                    "Content-Type" : "application/json"
-                },
                 url: "https://freight.aliexpress.com/ajaxFreightCalculateService.htm?callback=jQuery18304105555735913331_1542082591571&f=d&productid=" + product.productId +"&count=1&minPrice=51.02&maxPrice=54.93&currencyCode=USD&transactionCurrencyCode=USD&sendGoodsCountry=&country=US&province=&city=&abVersion=1&_=1542084501683"
             }).then(function successCallback(response) {
-                $scope.products.push(product);
                 console.log(response);
             }, function errorCallback(response) {
                 console.log(response);
