@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="css/style.css">
 
     <script src="javascipt/angular.min.js"></script>
+    <script src="javascipt/angular-table.min.js"></script>
     <script src="javascipt/controller.js"></script>
 </head>
 <body ng-app="myApp" ng-controller="controller">
@@ -59,5 +60,21 @@
     </form>
 </div>
 
+<div ng-if="products.length > 0" class="col-lg-6" style="margin-top: 20px">
+    <table class="table table-striped table-bordered" at-table at-list="products" at-paginated at-config="config">
+        <thead></thead>
+        <tbody>
+        <tr>
+            <td width="30%" at-sortable at-title="Tên SP" at-attribute="productTitle">
+                <a href="{{ item.productUrl }}">{{ item.productTitle }}</a>
+            </td>
+            <td at-implicit at-sortable at-title="Giá SP" at-attribute="originalPrice"></td>
+            <td at-implicit at-sortable at-title="Điểm" at-attribute="evaluateScore"></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <at-pagination at-config="config" at-list="products"></at-pagination>
+</div>
 </body>
 </html>

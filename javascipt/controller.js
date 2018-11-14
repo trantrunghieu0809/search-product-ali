@@ -1,4 +1,4 @@
-var app = angular.module('myApp', []);
+var app = angular.module('myApp', ['angular-table']);
 app.controller('controller', function($scope, $http) {
 
     $url = "https://gw.api.alibaba.com/openapi/param2/2/portals.open/api.listPromotionProduct/96623?";
@@ -1078,6 +1078,11 @@ app.controller('controller', function($scope, $http) {
 
     $scope.products = [];
 
+    $scope.config = {
+        itemsPerPage: 20,
+        fillLastPage: true
+    };
+
     $scope.params = {
         pageNo: 1,
         categoryId: null,
@@ -1102,7 +1107,13 @@ app.controller('controller', function($scope, $http) {
             url: $url + $_url
         }).then(function successCallback(response) {
             var data = response.data.result;
-            getFreight(data.products);
+            data.products;
+
+            angular.forEach(data.products, function(product) {
+                $scope.products.push(product);
+            });
+            console.log($scope.products);
+            //getFreight(data.products);
         }, function errorCallback(response) {
 
         });
